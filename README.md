@@ -5,5 +5,5 @@
 - Yaritza Yanez (yaritzay27)
 - Gael Arellano (GaelAre)
 
-## Back End Code
+## Backend Code
 [Final-Project-Server (backend)](https://github.com/JinLin6398/final-project-server.git)
