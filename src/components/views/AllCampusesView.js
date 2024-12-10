@@ -25,11 +25,10 @@ const AllCampusesView = (props) => {
       <h1>All Campuses</h1>
 
       {campuses.map((campus) => {
-          let name = campus.firstname + " " + campus.lastname;
           return (
             <div key={campus.id}>
               <Link to={`/campus/${campus.id}`}>
-                <h2>{name}</h2>
+                <h2>{campus.name}</h2>
               </Link>
               <button onClick={() => deleteCampus(campus.id)}>Delete</button>
               <hr/>
