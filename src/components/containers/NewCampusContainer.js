@@ -18,9 +18,10 @@ class NewCampusContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      firstname: "", 
-      lastname: "", 
-      campusId: null, 
+      name: "", 
+      imageUrl: "",
+      address: "",
+      description: "",
       redirect: false, 
       redirectId: null
     };
@@ -38,9 +39,10 @@ class NewCampusContainer extends Component {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
 
     let campus = {
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        campusId: this.state.campusId
+        name: this.state.name,
+        imageUrl: this.state.imageUrl,
+        address: this.state.address,
+        description: this.state.description
     };
     
     // Add new campus in back-end database
@@ -48,9 +50,10 @@ class NewCampusContainer extends Component {
 
     // Update state, and trigger redirect to show the new campus
     this.setState({
-      firstname: "", 
-      lastname: "", 
-      campusId: null, 
+      name: "", 
+      imageUrl: "",
+      address: "",
+      description: "",
       redirect: true, 
       redirectId: newCampus.id
     });
