@@ -14,9 +14,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
 // Define styling for the header
+
 const useStyles = makeStyles(theme => ({
   root: {
+    zIndex: 10,
     flexGrow: 1,
+    position: 'fixed',
+    width: '100vw',
   },
   title: {
     flexGrow: 1,
@@ -24,11 +28,15 @@ const useStyles = makeStyles(theme => ({
     fontType: 'bold',
     fontFamily: 'sans-serif', 
     fontSize: '35px', 
-    color: 'darkblue'
+    color: 'white'
   },
   appBar:{
-    backgroundColor: '#fcb6bb',
+    backgroundColor: 'rgb(18,50,155)',
+    boxShadow: '1px 3px 3px 6px rgb(212, 212, 220)',
     shadows: ['none'],
+    margin: '1 rem',
+    height: '10vh',
+    justifyContent: 'center',
   },
   greeting:{
     display: 'flex',
@@ -51,23 +59,23 @@ const Header = () => {
       <AppBar position="static" elevation={0} className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title} color="inherit" >
-            Campus Management System
+            <strong>CUNYSecond</strong>
           </Typography>
 
           <Link className={classes.links} to={'/'} >
-            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+            <Button variant="contained" color="inherit" size="medium" style={{marginRight: '10px'}}>
               Home
             </Button>
           </Link>
 
           <Link className={classes.links} to={'/campuses'} >
-            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+            <Button variant="contained" color="inherit" size="medium" style={{marginRight: '10px'}}>
               All Campuses
             </Button>
           </Link>
 
           <Link className={classes.links} to={'/students'} >
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="inherit" size="medium">
               All Students
             </Button>
           </Link>

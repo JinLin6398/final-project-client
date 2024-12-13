@@ -22,7 +22,7 @@ class NewStudentContainer extends Component {
       email: "",
       imageUrl: "",
       gpa: null,
-      campusId: null,
+      campusId: props.campusId || null,
       redirect: false,
       redirectId: null,
       errors: {} // New field to track validation errors
@@ -59,6 +59,7 @@ class NewStudentContainer extends Component {
   // Handle form submission
   handleSubmit = async (event) => {
     event.preventDefault(); // Prevent page reload
+
 
     const errors = this.validateFields();
     if (Object.keys(errors).length > 0) {
@@ -107,7 +108,7 @@ class NewStudentContainer extends Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           errors={this.state.errors} // Pass errors to the view
-        />
+         />
       </div>
     );
   }

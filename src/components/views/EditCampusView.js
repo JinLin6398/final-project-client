@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
     backgroundColor:'#c5c8d6',
     marginBottom: '15px',
     textAlign: 'center',
-    borderRadius: '5px 5px 0px 0px',
+    borderRadius: '1rem 1rem 0rem 0rem',
     padding: '3px'
   },
   errorText: {
@@ -35,74 +35,76 @@ const useStyles = makeStyles(() => ({
 }));
 
 const EditCampusView = (props) => {
-  const { handleChange, handleSubmit, campus, errors } = props;
-  const classes = useStyles();
-
-  return (
-    <div>
-      <h1>Edit Campus</h1>
-      <div className={classes.root}>
-      <div className={classes.formContainer}>
-        <div className={classes.formTitle}>
-          <Typography style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', 
-            fontSize: '20px', color: '#11153e' }}>
-            Edit Campus
-          </Typography>
+    const { handleChange, handleSubmit, campus, errors } = props;
+    const classes = useStyles();
+  
+    // Render the form with campus details pre-filled
+    return (
+      <div style={{paddingTop: '10rem',}}>
+        <h1 style={{fontStyle: 'italic', fontSize: '2.5rem',}}>Edit Campus</h1>
+  
+        <div className={classes.root}>
+          <div className={classes.formContainer}>
+            <div className={classes.formTitle}>
+              <Typography style={{ fontWeight: 'bold', fontSize: '1.5rem', color: '#11153e' }}>
+                Edit Campus
+              </Typography>
+            </div>
+            <form style={{ textAlign: 'center' }} onSubmit={(e) => handleSubmit(e)}>
+              <label style={{ color:'#11153e', fontWeight: 'bold' }}>Name: </label>
+              <input 
+                type="text" 
+                name="name" 
+                value={campus.name || ''} 
+                onChange={(e) => handleChange(e)} 
+                className={classes.inputField}
+              />
+              {errors.name && <div className={classes.errorText}>{errors.name}</div>}
+              <br/><br/>
+              <div>
+                <label style={{ color:'#11153e', fontWeight: 'bold' }}>Image Url: </label>
+                <input 
+                  type="text" 
+                  name="imageUrl" 
+                  value={campus.imageUrl || ''} 
+                  onChange={(e) => handleChange(e)} 
+                  className={classes.inputField}
+                />
+              </div>
+              <br/><br/>
+              <div>
+                <label style={{ color:'#11153e', fontWeight: 'bold' }}>Address: </label>
+                <input 
+                  type="text" 
+                  name="address" 
+                  value={campus.address || ''} 
+                  onChange={(e) => handleChange(e)} 
+                  className={classes.inputField}
+                />
+                {errors.address && <div className={classes.errorText}>{errors.address}</div>}
+              </div>
+              <br/><br/>
+              <div>
+                <label style={{ color:'#11153e', fontWeight: 'bold' }}>Description: </label>
+                <textarea 
+                  type="text" 
+                  name="description" 
+                  value={campus.description || ''} 
+                  onChange={(e) => handleChange(e)} 
+                  className={classes.inputField}
+                  rows="4"
+                />
+              </div>
+              <br/><br/>
+  
+              <Button variant="contained" color="primary" type="submit">
+                Submit
+              </Button>
+              <br/><br/>
+            </form>
+          </div>
         </div>
-
-        <form style={{ textAlign: 'center' }} onSubmit={(e) => handleSubmit(e)}>
-            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Name: </label>
-            <input 
-              type="text" 
-              name="name" 
-              value={campus.name || ''} 
-              onChange={handleChange}
-              className={classes.inputField}
-            />
-            {errors.name && <div className={classes.errorText}>{errors.name}</div>}
-            <br />
-            <br />
-          <div>
-            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Image Url: </label>
-            <input 
-              type="text" 
-              name="imageUrl" 
-              value={campus.imageUrl || ''} 
-              onChange={handleChange}
-              className={classes.inputField}
-            />
-          </div>
-          <br />
-          <div>
-            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Address: </label>
-            <input 
-              type="text" 
-              name="address" 
-              value={campus.address || ''} 
-              onChange={handleChange}
-              className={classes.inputField}
-            />
-            {errors.address && <div className={classes.errorText}>{errors.address}</div>}
-          </div>
-          <br />
-          <div>
-            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Description: </label>
-            <textarea 
-              name="description" 
-              value={campus.description || ''} 
-              onChange={handleChange}
-              className={classes.inputField}
-              rows="4"
-            />
-          </div>
-
-          <Button variant="contained" color="primary" type="submit">
-            Submit
-          </Button>
-        </form>
-      </div>
-      </div>
-    </div>    
+      </div>    
   );
 };
 
