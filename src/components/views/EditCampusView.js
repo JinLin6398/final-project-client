@@ -1,15 +1,9 @@
-/*==================================================
-EditCampusView.js
-
-The Views component is responsible for rendering web page with data provided by the corresponding Container component.
-It constructs a React component to display the new campus page.
-================================================== */
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Create styling for the input form
-const useStyles = makeStyles( () => ({
+const useStyles = makeStyles(() => ({
   formContainer:{  
     width: '500px',
     backgroundColor: '#f0f0f5',
@@ -32,10 +26,16 @@ const useStyles = makeStyles( () => ({
     borderRadius: '1rem 1rem 0rem 0rem',
     padding: '3px'
   },
+  errorText: {
+    color: 'red',
+    fontSize: '0.875rem',
+    marginTop: '5px',
+  },
+
 }));
 
 const EditCampusView = (props) => {
-    const { handleChange, handleSubmit, campus } = props;
+    const { handleChange, handleSubmit, campus, errors } = props;
     const classes = useStyles();
   
     // Render the form with campus details pre-filled
@@ -57,34 +57,44 @@ const EditCampusView = (props) => {
                 name="name" 
                 value={campus.name || ''} 
                 onChange={(e) => handleChange(e)} 
+                className={classes.inputField}
               />
+              {errors.name && <div className={classes.errorText}>{errors.name}</div>}
               <br/><br/>
-  
-              <label style={{ color:'#11153e', fontWeight: 'bold' }}>Image Url: </label>
-              <input 
-                type="text" 
-                name="imageUrl" 
-                value={campus.imageUrl || ''} 
-                onChange={(e) => handleChange(e)} 
-              />
+              <div>
+                <label style={{ color:'#11153e', fontWeight: 'bold' }}>Image Url: </label>
+                <input 
+                  type="text" 
+                  name="imageUrl" 
+                  value={campus.imageUrl || ''} 
+                  onChange={(e) => handleChange(e)} 
+                  className={classes.inputField}
+                />
+              </div>
               <br/><br/>
-  
-              <label style={{ color:'#11153e', fontWeight: 'bold' }}>Address: </label>
-              <input 
-                type="text" 
-                name="address" 
-                value={campus.address || ''} 
-                onChange={(e) => handleChange(e)} 
-              />
+              <div>
+                <label style={{ color:'#11153e', fontWeight: 'bold' }}>Address: </label>
+                <input 
+                  type="text" 
+                  name="address" 
+                  value={campus.address || ''} 
+                  onChange={(e) => handleChange(e)} 
+                  className={classes.inputField}
+                />
+                {errors.address && <div className={classes.errorText}>{errors.address}</div>}
+              </div>
               <br/><br/>
-  
-              <label style={{ color:'#11153e', fontWeight: 'bold' }}>Description: </label>
-              <input 
-                type="text" 
-                name="description" 
-                value={campus.description || ''} 
-                onChange={(e) => handleChange(e)} 
-              />
+              <div>
+                <label style={{ color:'#11153e', fontWeight: 'bold' }}>Description: </label>
+                <textarea 
+                  type="text" 
+                  name="description" 
+                  value={campus.description || ''} 
+                  onChange={(e) => handleChange(e)} 
+                  className={classes.inputField}
+                  rows="4"
+                />
+              </div>
               <br/><br/>
   
               <Button variant="contained" color="primary" type="submit">
@@ -95,7 +105,7 @@ const EditCampusView = (props) => {
           </div>
         </div>
       </div>    
-    );
-  }
-  
-  export default EditCampusView;
+  );
+};
+
+export default EditCampusView;

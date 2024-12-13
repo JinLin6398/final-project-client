@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import EditStudentView from '../views/EditStudentView'; // Rename to EditStudentView
+import EditStudentView from '../views/EditStudentView'; 
 import { editStudentThunk, fetchStudentThunk } from '../../store/thunks';
 
 class EditStudentContainer extends Component {
@@ -17,7 +17,8 @@ class EditStudentContainer extends Component {
     gpa: null,
     campusId: null,
     redirect: false,
-    redirectId: null
+    redirectId: null,
+    errors: {} // Add error state
     };
   }
 
@@ -40,6 +41,27 @@ class EditStudentContainer extends Component {
     }
   }
 
+  
+  // Validation logic for input fields
+  validateFields = () => {
+    const errors = {};
+    if (!this.state.firstname.trim()) {
+      errors.firstname = "First name is required.";
+    }
+    if (!this.state.lastname.trim()) {
+      errors.lastname = "Last name is required.";
+    }
+    if (!this.state.email.trim()) {
+      errors.email = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(this.state.email)) {
+      errors.email = "Invalid email format.";
+    }
+    if (this.state.gpa !== null && (this.state.gpa < 0.0 || this.state.gpa > 4.0)) {
+      errors.gpa = "GPA must be between 0.0 and 4.0.";
+    }
+    return errors;
+  };
+
   // Capture input data when it is entered
   handleChange = event => {
     this.setState({
@@ -48,28 +70,34 @@ class EditStudentContainer extends Component {
   }
 
   // Submit the form data to update student details
-  handleSubmit = async event => {
-    event.preventDefault();
+  handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent page reload
 
-    const student = {
-      id: this.props.match.params.id, // Use the student ID from the URL
+    const errors = this.validateFields();
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
+      return;
+    }
+
+    let student = {
+      id: this.props.match.params.id,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email,
-      imageUrl: this.state.imageUrl,
+      imageUrl: this.state.imageUrl.trim() ? this.state.imageUrl : undefined,
       gpa: this.state.gpa,
-      campusId: this.state.campusId
+      campusId: this.state.campusId,
     };
 
-    // Update the student via Redux Thunk
-    let updatedStudent = await this.props.editStudent(student);
+      await this.props.editStudent(student);
 
-    // Redirect to the updated student page
-    this.setState({
-      redirect: true,
-      redirectId: student.id
-    });
-  }
+      this.setState({
+        redirect: true,
+        redirectId: student.id,
+        errors: {}, // Clear errors on success
+      });
+
+  };
 
   // Render the edit student form
   render() {
@@ -83,7 +111,8 @@ class EditStudentContainer extends Component {
         <EditStudentView 
           handleChange={this.handleChange} 
           handleSubmit={this.handleSubmit}
-          student={this.state} // Pass the state as 'student' prop
+          student={this.state}
+          errors={this.state.errors} // Pass errors to the view
         />
       </div>          
     );

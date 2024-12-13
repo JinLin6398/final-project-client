@@ -32,10 +32,15 @@ const useStyles = makeStyles( () => ({
     borderRadius: '1rem 1rem 0rem 0rem',
     padding: '3px'
   },
+  errorText: {
+    color: 'red',
+    fontSize: '0.875rem',
+    marginTop: '5px',
+  },
 }));
 
 const EditStudentView = (props) => {
-    const { handleChange, handleSubmit, student } = props;
+    const { handleChange, handleSubmit, student, errors } = props;
     const classes = useStyles();
   
     // Render the form with student details pre-filled
@@ -57,8 +62,11 @@ const EditStudentView = (props) => {
                 name="firstname" 
                 value={student.firstname || ''} 
                 onChange={(e) => handleChange(e)} 
-              />
-              <br/><br/>
+                className={classes.inputField}
+                />
+                {errors.firstname && <div className={classes.errorText}>{errors.firstname}</div>}
+                <br />
+                <br />
 
               <label style={{ color:'#11153e', fontWeight: 'bold' }}>Lastname: </label>
               <input 
@@ -66,8 +74,11 @@ const EditStudentView = (props) => {
                 name="lastname" 
                 value={student.lastname || ''} 
                 onChange={(e) => handleChange(e)} 
-              />
-              <br/><br/>
+                className={classes.inputField}
+                />
+                {errors.lastname && <div className={classes.errorText}>{errors.lastname}</div>}
+                <br />
+                <br />
   
               <label style={{ color:'#11153e', fontWeight: 'bold' }}>Email: </label>
               <input 
@@ -75,8 +86,11 @@ const EditStudentView = (props) => {
                 name="email" 
                 value={student.email || ''} 
                 onChange={(e) => handleChange(e)} 
-              />
-              <br/><br/>
+                className={classes.inputField}
+                />
+                {errors.email && <div className={classes.errorText}>{errors.email}</div>}
+                <br />
+                <br />
 
               <label style={{ color:'#11153e', fontWeight: 'bold' }}>Image Url: </label>
               <input 
@@ -93,8 +107,11 @@ const EditStudentView = (props) => {
                 name="gpa" 
                 value={student.gpa || ''} 
                 onChange={(e) => handleChange(e)} 
-              />
-              <br/><br/>
+                className={classes.inputField}
+                />
+                {errors.gpa && <div className={classes.errorText}>{errors.gpa}</div>}
+                <br />
+                <br />
 
               <label style={{ color:'#11153e', fontWeight: 'bold' }}>Campus ID: </label>
               <input 

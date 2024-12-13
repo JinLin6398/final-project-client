@@ -33,9 +33,8 @@ const useStyles = makeStyles( () => ({
     padding: '3px'
   },
 }));
-
 const NewCampusView = (props) => {
-  const {handleChange, handleSubmit } = props;
+  const { handleChange, handleSubmit, errors } = props; // Destructure errors
   const classes = useStyles();
 
   // Render a New Campus view with an input form
@@ -50,37 +49,59 @@ const NewCampusView = (props) => {
               Add a Campus
             </Typography>
           </div>
-          <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
-            <label style= {{color:'#11153e', fontWeight: 'bold'}}>Name: </label>
-            <input type="text" name="name" onChange ={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+          <form style={{ textAlign: 'center' }} onSubmit={(e) => handleSubmit(e)}>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Image Url: </label>
-            <input type="text" name="imageUrl" onChange={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+            <div>
+              <label htmlFor="name" style={{ color: '#11153e', fontWeight: 'bold' }} > Name:
+              </label>
+              <input id="name" type="text" name="name" onChange={(e) => handleChange(e)} 
+              style={{ borderColor: errors?.name ? 'red' : 'initial', }} />
+              {errors?.name && (
+                <Typography color="error" variant="body2">
+                  {errors.name}
+                </Typography>
+              )}
+            </div>
+            <br />
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Address: </label>
-            <input type="text" name="address" onChange={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+            <div>
+            <label htmlFor="imageUrl" style={{ color: '#11153e', fontWeight: 'bold' }}> Image URL: 
+            </label>
+              <input id="imageUrl" type="text" name="imageUrl" onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <br />
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Description: </label>
-            <input type="text" name="description" onChange={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+            <div>
+              <label htmlFor="address" style={{ color: '#11153e', fontWeight: 'bold' }}>Address:
+              </label>
+              <input id="address" type="text" name="address" onChange={(e) => handleChange(e)} 
+              style={{ borderColor: errors?.address ? 'red' : 'initial', }} />
+              {errors?.address && (
+                <Typography color="error" variant="body2">
+                  {errors.address}
+                </Typography>
+              )}
+            </div>
+            <br />
 
+            <div>
+              <label htmlFor="description" style={{ color: '#11153e', fontWeight: 'bold' }}>
+                Description:</label>
+              <textarea id="description" type="text" name="description" rows = "4"
+              onChange={(e) => handleChange(e)}
+              />
+            </div>
+
+            <br />
             <Button variant="contained" color="primary" type="submit">
               Submit
             </Button>
-            <br/>
-            <br/>
           </form>
-          </div>
+        </div>
       </div>
-    </div>    
-  )
-}
+    </div>
+  );
+};
 
 export default NewCampusView;
