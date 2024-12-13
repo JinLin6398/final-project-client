@@ -2,6 +2,7 @@ import "./App.css";
 
 //Router
 import { Switch, Route } from "react-router-dom";
+import whitebg from './images/whiteBackground.jpg';
 //Components
 import {
   HomePageContainer,
@@ -21,7 +22,7 @@ import {
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App" style={bgImageStyle}>
       <Switch>
         <Route exact path="/" component={HomePageContainer} />
         <Route exact path="/campuses" component={AllCampusesContainer} />
@@ -37,4 +38,10 @@ const App = () => {
   );
 }
 
+const bgImageStyle = {
+  backgroundColor: 'rgb(240, 240, 240)',
+  backgroundImage:  `url(${whitebg})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+}
 export default App;

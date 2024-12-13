@@ -29,7 +29,7 @@ const useStyles = makeStyles( () => ({
     backgroundColor:'#c5c8d6',
     marginBottom: '15px',
     textAlign: 'center',
-    borderRadius: '5px 5px 0px 0px',
+    borderRadius: '1rem 1rem 0rem 0rem',
     padding: '3px'
   },
 }));
@@ -40,13 +40,13 @@ const EditStudentView = (props) => {
   
     // Render the form with student details pre-filled
     return (
-      <div>
-        <h1>Edit Student</h1>
+      <div style={{paddingTop: '10rem',}}>
+        <h1 style={{fontStyle: 'italic', fontSize: '2.5rem',}}>Edit Student</h1>
   
         <div className={classes.root}>
           <div className={classes.formContainer}>
             <div className={classes.formTitle}>
-              <Typography style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e' }}>
+              <Typography style={{ fontWeight: 'bold', fontSize: '1.5rem', color: '#11153e' }}>
                 Edit Student
               </Typography>
             </div>

@@ -29,24 +29,24 @@ const useStyles = makeStyles( () => ({
     backgroundColor:'#c5c8d6',
     marginBottom: '15px',
     textAlign: 'center',
-    borderRadius: '5px 5px 0px 0px',
+    borderRadius: '1rem 1rem 0rem 0rem',
     padding: '3px'
   },
 }));
 
 const NewStudentView = (props) => {
-  const {handleChange, handleSubmit } = props;
+  const {handleChange, handleSubmit, campusId } = props;
   const classes = useStyles();
 
   // Render a New Student view with an input form
   return (
-    <div>
-      <h1>New Student</h1>
+    <div style={{paddingTop: '10rem',}}>
+      <h1 style={{fontStyle: 'italic', fontSize: '2.5rem',}}>New Student</h1>
 
       <div className={classes.root}>
         <div className={classes.formContainer}>
           <div className={classes.formTitle}>
-            <Typography style={{fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e'}}>
+            <Typography style={{fontWeight: 'bold', fontSize: '1.5rem', color: '#11153e',}}>
               Add a Student
             </Typography>
           </div>
@@ -77,7 +77,7 @@ const NewStudentView = (props) => {
             <br/>
 
             <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
-            <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
+            <input type="text" name="campusId" onChange={(e) => handleChange(e)}/>
             <br/>
             <br/>
 
@@ -92,5 +92,7 @@ const NewStudentView = (props) => {
     </div>    
   )
 }
+
+
 
 export default NewStudentView;
