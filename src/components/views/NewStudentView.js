@@ -35,7 +35,7 @@ const useStyles = makeStyles( () => ({
 }));
 
 const NewStudentView = (props) => {
-  const {handleChange, handleSubmit } = props;
+  const { handleChange, handleSubmit, errors } = props; // Include errors in props
   const classes = useStyles();
 
   // Render a New Student view with an input form
@@ -46,51 +46,77 @@ const NewStudentView = (props) => {
       <div className={classes.root}>
         <div className={classes.formContainer}>
           <div className={classes.formTitle}>
-            <Typography style={{fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e'}}>
+            <Typography style={{ fontWeight: "bold", fontFamily: "Courier, sans-serif", fontSize: "20px", color: "#11153e", }} >
               Add a Student
             </Typography>
           </div>
-          <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
-            <label style= {{color:'#11153e', fontWeight: 'bold'}}>First Name: </label>
-            <input type="text" name="firstname" onChange ={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+          <form style={{ textAlign: "center" }} onSubmit={(e) => handleSubmit(e)}>
+            <div>
+              <label style={{ color: "#11153e", fontWeight: "bold" }}>First Name: </label>
+              <input type="text" name="firstname" onChange={(e) => handleChange(e)} />
+              {errors.firstname && (
+                <div style={{ color: "red", fontSize: "12px" }}>
+                  {errors.firstname}
+                </div>
+              )}
+            </div>
+            <br />
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Last Name: </label>
-            <input type="text" name="lastname" onChange={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+            <div>
+              <label style={{ color: "#11153e", fontWeight: "bold" }}>Last Name: </label>
+              <input type="text" name="lastname" onChange={(e) => handleChange(e)} />
+              {errors.lastname && (
+                <div style={{ color: "red", fontSize: "12px" }}>
+                  {errors.lastname}
+                </div>
+              )}
+            </div>
+            <br />
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Email: </label>
-            <input type="text" name="email" onChange={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+            <div>
+              <label style={{ color: "#11153e", fontWeight: "bold" }}>Email: </label>
+              <input type="text" name="email" onChange={(e) => handleChange(e)} />
+              {errors.email && (
+                <div style={{ color: "red", fontSize: "12px" }}>
+                  {errors.email}
+                </div>
+              )}
+            </div>
+            <br />
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>imageUrl: </label>
-            <input type="text" name="imageUrl" onChange={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+            <div>
+              <label style={{ color: "#11153e", fontWeight: "bold" }}>Image URL: </label>
+              <input type="text" name="imageUrl" onChange={(e) => handleChange(e)} />
+            </div>
+            <br />
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>GPA: </label>
-            <input type="number" name="gpa" step="0.01" onChange={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+            <div>
+              <label style={{ color: "#11153e", fontWeight: "bold" }}>GPA: </label>
+              <input type="number" name="gpa" step="0.01" onChange={(e) => handleChange(e)} />
+              {errors.gpa && (
+                <div style={{ color: "red", fontSize: "12px" }}>
+                  {errors.gpa}
+                </div>
+              )}
+            </div>
+            <br />
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Campus Id: </label>
-            <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
-            <br/>
-            <br/>
+            <div>
+              <label style={{ color: "#11153e", fontWeight: "bold" }}>Campus ID: </label>
+              <input type="text" name="campusId" onChange={(e) => handleChange(e)} />
+            </div>
+            <br />
 
             <Button variant="contained" color="primary" type="submit">
               Submit
             </Button>
-            <br/>
-            <br/>
+            <br />
+            <br />
           </form>
-          </div>
+        </div>
       </div>
-    </div>    
-  )
-}
+    </div>
+  );
+};
 
 export default NewStudentView;
