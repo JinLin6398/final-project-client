@@ -51,9 +51,8 @@ const mapDispatch = (dispatch) => {
         dispatch(editStudentThunk(student)).then(() => {
         dispatch(fetchCampusThunk(campusId));
     });
-    }
-  }
-};
+    },
+  };
 
 // Export store-connected container by default
 // CampusContainer uses "connect" function to connect to Redux Store and to read values from the Store 
