@@ -4,60 +4,83 @@ CampusView.js
 The Views component is responsible for rendering web page with data provided by the corresponding Container component.
 It constructs a React component to display a single campus and its students (if any).
 ================================================== */
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Button from '@material-ui/core/Button';
 import whitebg from '../../images/whiteBackground.jpg';
 
 // Take in props data to construct the component
 const CampusView = (props) => {
-  let history = useHistory();
-  const {campus, deleteCampus, deleteStudent } = props;
-  
-  const handleClick = () => {
-    deleteCampus(campus.id);
-    history.goBack()
-  };
-  // Render a single Campus view with list of its students
+  const { campus, editStudent } = props;
+
   return (
     <div style={mainViewStyle}>
       <div style={campusInfoStyle}>
-        <img 
-          src={campus.imageUrl} 
-          alt={`${campus.name}`} 
-          style={{ width: "150px", height: "150px", borderRadius: "50%", borderStyle: 'solid', borderWidth: '2px', borderColor: '#090909',}} 
+        <img
+          src={campus.imageUrl}
+          alt={`${campus.name}`}
+          style={campusImgStyle}
         />
-        <h1 style={{fontStyle: 'italic', fontSize: '2.5rem', marginBottom: '0.1rem', }}>{campus.name}</h1>
-        <p style={{fontStyle: 'italic'}}>{campus.address}</p>
+        <h1 style={{ fontStyle: 'italic', fontSize: '2.5rem', marginBottom: '0.1rem' }}>{campus.name}</h1>
+        <p style={{ fontStyle: 'italic' }}>{campus.address}</p>
         <p>{campus.description}</p>
-        <br/>
-        <Link to={`/editcampus/${campus.id}`}><Button variant="contained" color="primary" size="large">Edit Campus</Button></Link>
-        <br/>
-        <Button onClick={handleClick} variant="outlined" color="secondary" size="large">Delete Campus</Button>
-        <br/>
-        <Link to={`/newstudent`}><Button variant="outlined" color="primary" size="small">Add New Student</Button></Link>
+        <br />
+        <Link to={`/editcampus/${campus.id}`}>
+          <Button variant="contained" color="primary" size="large">Edit Campus</Button>
+        </Link>
+        <br />
+        <Button variant="outlined" color="secondary" size="large">Delete Campus</Button>
       </div>
-      <hr style={{width: '80%', marginBottom: '2rem', marginTop: '2rem'}}></hr>
-      <div style={studentDisplayStyle}>
-        {campus.students.map( student => {
-          let name = student.firstname + " " + student.lastname;
-          return (
-            <div key={student.id} style={indvStudentStyle}>
-              <Link to={`/student/${student.id}`}>
-                  <Button variant="contained" color="primary" size="large" style={{fontSize: '1rem', fontWeight: '600'}}>{name}</Button>
-              </Link>
-              <br/>
-              <img 
-                  src={student.imageUrl} 
-                  alt={`${name}`} 
-                  style={{ width: "100px", height: "100px", borderRadius: "50%", borderStyle: 'solid', borderWidth: '2px', borderColor: '#090909', marginBottom: '2rem', marginTop: '2rem',}} 
-              />
-              <br/>
-              <Button onClick={() => deleteStudent(student.id)} variant="outlined" color="secondary" size="medium">Delete Student</Button>         
-            </div>
-          );
-        })}
-      </div>
+
+      <hr style={hrStyle} />
+
+      <h1>List of Students</h1>
+      <Link to={`/newstudent`}>
+        <Button variant="outlined" color="primary" size="small">Add New Student</Button>
+      </Link>
+
+      {(!campus.students.length) ? (
+        <div>
+          <p>There are no students enrolled in this campus :C</p>
+        </div>
+      ) : (
+        <div style={studentDisplayStyle}>
+          {campus.students.map(student => {
+            let name = `${student.firstname} ${student.lastname}`;
+            return (
+              <div key={student.id} style={indvStudentStyle}>
+                <Link to={`/student/${student.id}`}>
+                  <h2>{name}</h2>
+                </Link>
+                <img
+                  src={student.imageUrl}
+                  alt={`${name}`}
+                  style={studentImgStyle}
+                />
+                <Button
+                  onClick={() => {
+                    let newstudent = {
+                      id: student.id,
+                      firstname: student.firstname,
+                      lastname: student.lastname,
+                      email: student.email,
+                      campusId: null,
+                      imageUrl: student.imageUrl,
+                      gpa: student.gpa,
+                    };
+                    editStudent(newstudent, campus.id);
+                  }}
+                  variant="outlined"
+                  color="secondary"
+                  size="medium"
+                >
+                  Unenroll Student
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
@@ -105,6 +128,28 @@ const indvStudentStyle = {
   padding: '2rem',
   margin: '2rem',
   minWidth: '13rem',
+}
+
+const campusImgStyle = {
+  width: '150px',
+  height: '150px',
+  borderRadius: '50%',
+  border: '2px solid #090909',
+}
+
+const studentImgStyle = {
+  width: '100px',
+  height: '100px',
+  borderRadius: '50%',
+  border: '2px solid #090909',
+  marginBottom: '2rem',
+  marginTop: '2rem',
+}
+
+const hrStyle = {
+  width: '80%',
+  marginTop: '2rem',
+  marginBottom: '2rem',
 }
 
 export default CampusView;
