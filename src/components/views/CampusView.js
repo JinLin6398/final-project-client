@@ -30,14 +30,16 @@ const CampusView = (props) => {
         </Link>
         <br />
         <Button variant="outlined" color="secondary" size="large">Delete Campus</Button>
+        <br />
+        <Link to={`/newstudent`}>
+        <Button variant="outlined" color="primary" size="small">Add New Student</Button>
+      </Link>
       </div>
 
       <hr style={hrStyle} />
 
       <h1>List of Students</h1>
-      <Link to={`/newstudent`}>
-        <Button variant="outlined" color="primary" size="small">Add New Student</Button>
-      </Link>
+
 
       {(!campus.students.length) ? (
         <div>
