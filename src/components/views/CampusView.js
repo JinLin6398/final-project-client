@@ -11,7 +11,7 @@ import whitebg from '../../images/whiteBackground.jpg';
 
 // Take in props data to construct the component
 const CampusView = (props) => {
-  const { campus, editStudent, deleteCampus } = props;
+  const { campus, editStudent } = props;
 
   return (
     <div style={mainViewStyle}>
@@ -29,7 +29,7 @@ const CampusView = (props) => {
           <Button variant="contained" color="primary" size="large">Edit Campus</Button>
         </Link>
         <br />
-
+        
         <Link to={`/newstudent`}>
         <Button variant="outlined" color="primary" size="small">Add New Student</Button>
       </Link>
