@@ -53,6 +53,7 @@ const mapDispatch = (dispatch) => {
     });
     },
   };
+};
 
 // Export store-connected container by default
 // CampusContainer uses "connect" function to connect to Redux Store and to read values from the Store 
